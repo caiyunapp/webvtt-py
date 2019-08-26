@@ -46,6 +46,15 @@ class TextBasedParser(object):
 
         return lines
 
+    def parse_text(self, text):
+        lines = text.split("\n")
+        if len(lines) > 0 and len(lines[len(lines)-1]) == 0:
+            del lines[len(lines)-1]
+        content = lines
+        self._validate(content)
+        self._parse(content)
+        return self
+
     def _parse_timeframe_line(self, line):
         """Parse timeframe line and return start and end timestamps."""
         tf = self._validate_timeframe_line(line)
